@@ -1,8 +1,6 @@
 package streamapi;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,6 +13,7 @@ import java.util.stream.Stream;
 public class StreamAPI {
 
     // ПРОМЕЖУТОЧНЫЕ ОПЕРАЦИИ
+
     /**
      * filter - промежуточная операция, фильтр по специальностям с лямбда-выражением, отбираются те специалисты, которые соответствуют условию;
      * collect - терминальная операция, формирует стрим в коллекцию с помощью коллектора в список
@@ -46,6 +45,7 @@ public class StreamAPI {
     /**
      * sorted - промежуточная операция, сортировка объектов с использованием компаратора, в котором задается параметр сортировки по имени;
      * collect - терминальная операция, формирует стрим в коллекцию с помощью коллектора в список
+     *
      * @param specialists список специалистов
      * @return список специалистов после выполнения стрима
      */
@@ -57,6 +57,7 @@ public class StreamAPI {
 
     /**
      * concat - промежуточная операция, объединяет два потока
+     *
      * @param specialists1 список специалистов 1
      * @param specialists2 список специалистов 2
      * @return список специалистов после объединения
@@ -71,6 +72,7 @@ public class StreamAPI {
 
     /**
      * distinct - промежуточная операция, возвращает потом с уникальными элементами
+     *
      * @param specialists список специалистов
      * @return список специалистов после отбора уникальных
      */
@@ -82,6 +84,7 @@ public class StreamAPI {
 
     /**
      * dropWhile - промежуточная операция, пропускает элементы подходящие по условию в предикате, пока не попадется неподходящий элемент
+     *
      * @param specialists список специалистов
      * @return список специалистов после пропуска
      */
@@ -93,6 +96,7 @@ public class StreamAPI {
 
     /**
      * limit - промежуточная операция, оставляет в потоке определенное количество элементов
+     *
      * @param specialists список специалистов
      * @return список специалистов в определенном количестве
      */
@@ -104,6 +108,7 @@ public class StreamAPI {
 
     /**
      * map - промежуточная операция, преобразует элементы из одного типа в другой
+     *
      * @param specialists список специалистов
      * @return преобразованный список элементов
      */
@@ -116,6 +121,7 @@ public class StreamAPI {
 
     /**
      * flatMap - промежуточная операция, преобразует элементы из одного типа в другой
+     *
      * @param listOfListsSpecialists список списков специалистов
      * @return преобразованный список специалистов
      */
@@ -127,6 +133,7 @@ public class StreamAPI {
 
     /**
      * skip - промежуточная операция, возвращает поток с заданным количеством пропущенных первых элементов
+     *
      * @param specialists список специалистов
      * @return список специалистов с заданным количеством пропущенных первых элементов
      */
@@ -138,6 +145,7 @@ public class StreamAPI {
 
     /**
      * takeWhile - промежуточная операция, выбирает из потока элементы, пока они соответсвуют условию в предикате
+     *
      * @param specialists список специалистов
      * @return список специалистов после отбора
      */
@@ -147,7 +155,21 @@ public class StreamAPI {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * peek - выполнение действий над каждым элементом
+     *
+     * @param specialists список специалистов
+     * @return список специалистов после выполнения действий над элементами
+     */
+    // промежуточная
+    public static List<Specialist> peekElements(List<Specialist> specialists) {
+        return specialists.stream()
+                .peek(s -> s.setSalary(1000000))
+                .collect(Collectors.toList());
+    }
+
     // ТЕРМИНАЛЬНЫЕ ОПЕРАЦИИ
+
     /**
      * forEach - терминальная операция, обходит все объекты стрима и производит с ними какие либо действия,
      * в данном случае используется лямбда-выдажение, выводятся в консоль все специалисты
@@ -161,6 +183,7 @@ public class StreamAPI {
 
     /**
      * max = терминальная операция, находит объект, с максимальным значением с использованием компаратора, в котором задается параметр по которому происходит сравнение
+     *
      * @param specialists список специалистов
      * @return специалист после выполнения стрима
      */
@@ -171,6 +194,7 @@ public class StreamAPI {
 
     /**
      * min = терминальная операция, находит объект, с минимальным значением с использованием компаратора, в котором задается параметр по которому происходит сравнение
+     *
      * @param specialists список специалистов
      * @return специалист после выполнения стрима
      */
@@ -181,6 +205,7 @@ public class StreamAPI {
 
     /**
      * count - терминальная операция, врозвращает количество элементов в стриме
+     *
      * @param specialists список специалистов
      * @return количество специалистов с ЗП более 1 млн
      */
@@ -192,6 +217,7 @@ public class StreamAPI {
 
     /**
      * allMatch - терминальная операция, возвращает true, если все элементы потока удовлетворяют условию в предикате
+     *
      * @param specialists список специалистов
      * @return возвращает true, если все элементы потока удовлетворяют условию
      */
@@ -202,6 +228,7 @@ public class StreamAPI {
 
     /**
      * anyMatch - терминальная операция, возвращает true, хоть один элемент потока удовлетворяют условию в предикате
+     *
      * @param specialists список специалистов
      * @return возвращает true, если хоть один элемент потока удовлетворяют условию в предикате
      */
@@ -212,6 +239,7 @@ public class StreamAPI {
 
     /**
      * findFirst - терминальная операция, возвращает первый элемент из потока
+     *
      * @param specialists список специалистов
      * @return первый специалист в списке
      */
@@ -222,6 +250,7 @@ public class StreamAPI {
 
     /**
      * findAny - терминальная операция, возвращает любой элемент из потока
+     *
      * @param specialists список специалистов
      * @return любой специалист в списке
      */
@@ -232,6 +261,7 @@ public class StreamAPI {
 
     /**
      * noneMatch - терминальная операция, возвращает true, если все элементы потока НЕ удовлетворяют условию в предикате
+     *
      * @param specialists список специалистов
      * @return возвращает true, если все элементы потока НЕ удовлетворяют условию
      */
@@ -242,6 +272,7 @@ public class StreamAPI {
 
     /**
      * toArray - терминальная операция, возвращает массив элементов потока
+     *
      * @param specialists список специалистов
      * @return массив элементов потока
      */
@@ -249,5 +280,64 @@ public class StreamAPI {
         return specialists.stream()
                 .filter(s -> s.getSalary() < 1000000)
                 .toArray();
+    }
+
+    /**
+     * reduce - терминальная операция, сокращение элементов до одного значения
+     *
+     * @param specialists список специалистов
+     * @return сумма зарплат всех специалистов
+     */
+    public static Optional<Integer> reduceElemetsToTotalSalary(List<Specialist> specialists) {
+        return specialists.stream()
+                .map(s -> s.getSalary())
+                .reduce((s1, s2) -> s1 + s2);
+    }
+
+    /**
+     * parallel - создаем параллельный поток, чтобы элементы обрабатывались параллельно
+     * forEachOrdered - терминальная операция, поддерживает порядок элементов при параллельной обработке
+     *
+     * @param specialists список специалистов
+     */
+    public static void parallelAndForEachOrderedPrintSpecialists(List<Specialist> specialists) {
+        specialists.stream()
+                .parallel()
+                .forEachOrdered(System.out::println);
+    }
+
+    /**
+     * Collectors.groupingBy - группировка элементов по ключу
+     *
+     * @param specialists список специалистов
+     * @return мапа специалистов где ключом является специальность, а значением список специалистов по этой специальности
+     */
+    public static Map<Speciality, List<Specialist>> groupBySpeciality(List<Specialist> specialists) {
+        return specialists.stream()
+                .collect(Collectors.groupingBy(Specialist::getSpeciality));
+    }
+
+    /**
+     * Collectors.partitioningBy - группировка данных по условию
+     *
+     * @param specialists список специалистов
+     * @return мапа специалистов где ключом является выполнение словия, а значением список специалистов по которым выполняется или не выполняется условие
+     */
+    public static Map<Boolean, List<Specialist>> groupBySalaryOver1MillOrNot(List<Specialist> specialists) {
+        return specialists.stream()
+                .collect(Collectors.partitioningBy(s -> s.getSalary() >= 1000000));
+    }
+
+    /**
+     * mapToInt - преобразование потока в примитивный поток,
+     * summaryStatistics - получение статистики
+     *
+     * @param specialists список специалистов
+     * @return объект который содержит статистическую информацию о числах в потоке
+     */
+    public static IntSummaryStatistics getIntSummaryStatistics(List<Specialist> specialists) {
+        return specialists.stream()
+                .mapToInt(Specialist::getSalary)
+                .summaryStatistics();
     }
 }
